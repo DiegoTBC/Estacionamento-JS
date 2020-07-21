@@ -16,12 +16,12 @@
 
         <div class="botoes">
             <button type="button" class="btn btn-primary w-75" data-toggle="modal" data-target="#AdicionarCarro" style="margin-right:20px;" >Adicionar</button>
-            <button type="button" class="btn btn-warning w-75" id="listar">Listar</button>
+            <button type="button" class="btn btn-warning w-75" id="mostrarPatio">Mostrar Patio</button>
         </div>
 
         <div class="buscar">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar Veiculo pela Placa" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Buscar Veiculo pela Placa" aria-label="Username" aria-describedby="basic-addon1" id="pesquisar">
                 <button type="button" class="btn btn-info" id="buscar">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
@@ -35,24 +35,9 @@
 
         <div class="listaCarros">
 
-            <!--<table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">Placa</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Tempo</th>
-                    <th scope="col">Entrada</th>              
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row" >EEA 9969</th>
-                    <td>968986589</td>
-                    <td>01:30</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>-->
+            <table class="table table-hover">     
+                
+            </table>
 
         </div>
     </main> 
@@ -70,12 +55,12 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="needs-validation" novalidate>
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="marca">Marca</label>
                             <select class="form-select" aria-label="Default select example" id="marca" required>
-                                <option selected>Selecione a marca</option>
+                                <option selected disabled>Selecione a marca</option>
                                 <option value="Chevrolet">Chevrolet</option>
                                 <option value="Ford">Ford</option>
                                 <option value="Fiat">Fiat</option>

@@ -1,81 +1,119 @@
-let marca = document.querySelector("#marca")
-let modelo = document.querySelector("#modelo")
-let placa = document.querySelector("#placa")
-let telefone = document.querySelector("#telefone")
-let tempo = document.querySelector("#tempo")
-let preco = document.querySelector("#preco")
-let pago = document.querySelector("#pago")
-let naoPago = document.querySelector("#naoPago")
 let adicionar = document.querySelector("#adicionar")
-let fechar = document.querySelector(".fechar")
-let listar = document.querySelector("#listar")
-let buscar = document.querySelector("#buscar")
+let listarPatio = document.querySelector("#mostrarPatio")
+let pesquisar = document.querySelector("#buscar")
 
 
-
-let Carros = []
-
-function apagarItensDeFormulario(){
-    document.querySelector('form').reset()
-}
-
-function adicionarCarro(marca, modelo, placa, telefone, tempo, preco, entradaFormatado, entradaM, saida, pagamento ){
-    return {
-        marca,
-        modelo,
-        placa,
-        telefone,
-        tempo,
-        preco,
-        entradaFormatado,
-        entradaM,
-        saida,
-        pagamento
+function cadastrarVeiculo(e){
+    let marcaVeiculo = document.querySelector("#marca").value.toUpperCase()
+    let modeloVeiculo = document.querySelector("#modelo").value.toUpperCase()
+    let placaVeiculo = document.querySelector("#placa").value.toUpperCase()
+    let telefoneDonoVeiculo = document.querySelector("#telefone").value
+    let tempo = document.querySelector("#tempo").value
+    let preco = document.querySelector("#preco").value
+    let pago = document.querySelector("#pago").value
+    let naoPago = document.querySelector("#naoPago").value
+    let pagamento
+    if(pago.checked){
+        pagamento = true
+    } else {
+        pagamento = false
     }
+
+    let horaEntrada = Date.now()
+    let previsaoSaida = horaEntrada + (Number(tempo) * 60000)
+
+    let aux = new Date(horaEntrada)
+    let horaEntradaFormatada = `${aux.getHours()}:${aux.getMinutes()}`
+
+    aux = new Date(previsaoSaida)
+    let previsaoSaidaFormatada = `${aux.getHours()}:${aux.getMinutes()}`
+
+    if (placa.value == "" || telefone.value == "" || tempo.value == ""){
+        alert("Você não informou os campos necessário !")
+    }
+
+    let veiculo = {
+        Marca: marcaVeiculo,
+        Modelo: modeloVeiculo,
+        Placa: placaVeiculo,
+        Telefone: telefoneDonoVeiculo,
+        Preco: preco,
+        Tempo: tempo,
+        HoraEntradaF: horaEntradaFormatada,
+        PrevisaoSaidaFormatada: previsaoSaidaFormatada,
+        HoraEntrada: horaEntrada,
+        PrevisaoSaida: previsaoSaida,
+        Pago: pagamento
+    }
+
+    if (localStorage.getItem('patio') === null){
+        let veiculos = []
+        veiculos.push(veiculo);
+        localStorage.setItem('patio', JSON.stringify(veiculos))
+    } else {
+        var veiculos = JSON.parse(localStorage.getItem('patio'))
+        veiculos.push(veiculo)
+        localStorage.setItem('patio', JSON.stringify(veiculos))
+    }
+
+    document.querySelector('form').reset()
+
+    mostrarPatio()
+
+    e.preventDefault()
 }
 
-function listarCarros(){
-    listaCarros.innerHTML = `<table class="table table-hover">
-    
-  </table> `
+function mostrarPatio(){
+    let veiculos = JSON.parse(localStorage.getItem('patio'))
+    let listar = document.querySelector(".table")
 
-    table1.innerHTML = ` `
-    
-    Carros.forEach( (valor, indice) => {
-        table1.innerHTML += `<tr>
-        <th scope="col">${valor.placa}</th>
-        <th scope="col">${valor.telefone}</th>
-        <th scope="col">${valor.tempo}</th>
-        <th scope="col">${valor.entradaFormatado}</th>              
-      </tr>`
+    let tabela = `<tr>
+    <th scope="col">Placa</th>
+    <th scope="col">Telefone</th>
+    <th scope="col">Tempo</th>
+    <th scope="col">Entrada</th>              
+    </tr>`
+
+    veiculos.forEach(chave => { tabela +=
+        `<tr>
+        <td scope="row">${chave.Placa}</td>
+        <td>${chave.Telefone}</td>
+        <td>${chave.Tempo}</td>
+        <td>${chave.HoraEntradaF}</td>              
+        </tr> `
     })
 
-    
+    listar.innerHTML = tabela
 }
 
-adicionar.addEventListener("click", function(){
-    let marcaValor = marca.value
-    let modeloValor = modelo.value
-    let placaValor = placa.value
-    let telefoneValor = telefone.value
-    let tempoValor = Number(tempo.value)
-    let precoValor = Number(preco.value)
-    let hora = new Date().getHours()
-    let minutos = new Date().getMinutes()
-    let entradaFormatado = `${hora}:${minutos}`
-    let entradaM = Date.now()
-    let saida = entradaM + (tempoValor * 60000)
-    let pagamento
-    if (pago.checked){
-        pagamento = pago.value
-    } else {
-        pagamento = naoPago.value
-    }
+function pesquisarVeiculo(placa){
+    let veiculos = JSON.parse(localStorage.getItem('patio'))
+    let listar = document.querySelector(".table")
 
-    Carros.push(adicionarCarro(marcaValor, modeloValor, placaValor, telefoneValor, tempoValor, precoValor, entradaFormatado, entradaM, saida, pagamento))
+    veiculos.forEach(chave => {
+        if (placa === chave.Placa){ listar.innerHTML =
+            `<tr>
+            <th scope="col">Placa</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Tempo</th>
+            <th scope="col">Entrada</th>              
+            </tr>
+            <tr>
+            <td scope="row">${chave.Placa}</td>
+            <td>${chave.Telefone}</td>
+            <td>${chave.Tempo}</td>
+            <td>${chave.HoraEntradaF}</td>              
+            </tr> `
+        }
+    })    
+}
 
-    apagarItensDeFormulario()
+adicionar.addEventListener('click', cadastrarVeiculo)
 
+listarPatio.addEventListener('click', mostrarPatio)
+
+pesquisar.addEventListener('click', function(){
+    let placa = document.querySelector("#pesquisar").value
+    pesquisarVeiculo(placa.toUpperCase())
+    document.querySelector("#pesquisar").value = ""
 })
-
-listar.addEventListener("click", listarCarros)
