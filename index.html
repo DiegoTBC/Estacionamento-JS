@@ -5,27 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Estacionamento JS</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
     
-    <div class="principal">
-    </div>
+    <main>
+        <div class="logo"></div>
 
+        <div style="border-top: 3px solid rgb(189, 189, 189); margin-bottom: 15px;" ></div>
+
+        <div class="botoes">
+            <button type="button" class="btn btn-primary w-75" data-toggle="modal" data-target="#AdicionarCarro" style="margin-right:20px;" >Adicionar</button>
+            <button type="button" class="btn btn-warning w-75">Listar</button>
+        </div>
+
+        <div class="buscar">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar Veiculo pela Placa" aria-label="Username" aria-describedby="basic-addon1">
+                <button type="button" class="btn btn-info">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                  </svg>
+                </button>
+            </div>
+        </div>
+
+        <div style="border-bottom: 3px solid rgb(189, 189, 189);"></div>
+
+        <div class="listaCarros">
+
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Tempo</th>
+                    <th scope="col">Entrada</th>              
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" >EEA 9969</th>
+                    <td>968986589</td>
+                    <td>01:30</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+
+        </div>
+    </main> 
 
     
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AdicionarCarro">
-        Adicionar
-    </button>
-    
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#BuscarCarro">
-        Buscar
-    </button>
-
-    <!-- Modal -->
+    <!-- Modal Adicionar Carro-->
     <div class="modal fade" id="AdicionarCarro" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -76,7 +110,7 @@
                         <div class="input-group">
                             <span class="input-group-text" for="inputGroupSelect02">Tempo</span>
                             <select class="form-select" id="inputGroupSelect02">
-                                <option selected>Informe o Tempo</option>
+                                <option selected></option>
                                 <option value="30">00:30 H</option>
                                 <option value="60">01:00 H</option>
                                 <option value="90">01:30 H</option>
@@ -86,10 +120,10 @@
                             <input type="text" aria-label="Last name" class="form-control" readonly>
                         </div>
                 
-                        <div class="row">
+                        <div class="row" style="margin-top: 20px;">
                             <div class="col">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
                                     <label class="form-check-label" for="flexRadioDefault1">Pago</label>
                                 </div>
                             </div>
@@ -104,31 +138,10 @@
                     
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                 <button type="button" class="btn btn-primary">Adicionar</button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="BuscarCarro" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Buscar Veiculo no Pátio</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-            ...
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-        </div>
         </div>
     </div>
 
