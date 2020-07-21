@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Estacionamento JS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    
+    <div class="principal">
+    </div>
+
+
+    
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AdicionarCarro">
+        Adicionar
+    </button>
+    
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#BuscarCarro">
+        Buscar
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="AdicionarCarro" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Adicionar Veículo ao Pátio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupSelect01">Marca</label>
+                            <select class="form-select" aria-label="Default select example" id="inputGroupSelect01">
+                                <option selected>Selecione a marca</option>
+                                <option value="Chevrolet">Chevrolet</option>
+                                <option value="Ford">Ford</option>
+                                <option value="Fiat">Fiat</option>
+                                <option value="Volkswagen">Volkswagen</option>
+                                <option value="Peugeot">Peugeot</option>
+                                <option value="Renault">Renault</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Mercedes">Mercedes</option>
+                                <option value="BMW">BMW</option>
+                                <option value="Hyundai">Hyundai</option>
+                                <option value="Audi">Audi</option>
+                                <option value="Nissan">Nissan</option>
+                                <option value="Jeep">Jeep</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <label for="exampleFormControlInput1" class="input-group-text">Modelo</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                        </div>
+                    
+                        <div class="input-group mb-3">
+                            <label for="exampleFormControlInput2" class="input-group-text">Placa</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="">
+                        </div>
+                    
+                        <div class="input-group mb-3">
+                            <label for="exampleFormControlInput3" class="input-group-text">Telefone</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="99999-9999">
+                        </div>               
+                
+                        <div class="input-group">
+                            <span class="input-group-text" for="inputGroupSelect02">Tempo</span>
+                            <select class="form-select" id="inputGroupSelect02">
+                                <option selected>Informe o Tempo</option>
+                                <option value="30">00:30 H</option>
+                                <option value="60">01:00 H</option>
+                                <option value="90">01:30 H</option>
+                                <option value="120">02:00 H</option>
+                            </select>
+                            <span class="input-group-text">Preço</span>
+                            <input type="text" aria-label="Last name" class="form-control" readonly>
+                        </div>
+                
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">Pago</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault2">Não Pago</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="BuscarCarro" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Buscar Veiculo no Pátio</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+</body>
+</html>
