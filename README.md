@@ -12,7 +12,7 @@ Com ele você é capaz de:
 
 ### Lista de afazeres
 
-- [ ] Função de editar infomações dos veiculos
+- [ ] Função de editar informações dos veiculos
 - [ ] Validações dos formulários
 
 ### Status do Projeto
