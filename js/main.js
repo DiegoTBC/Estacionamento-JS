@@ -33,6 +33,9 @@ function cadastrarVeiculo(e){
         alert("Você não informou os campos necessário !")
     }
 
+    let regexPlaca = /\d{3}\s{4}/
+    let regexTelefone = /\d{9}/
+
     let veiculo = {
         Marca: marcaVeiculo,
         Modelo: modeloVeiculo,
@@ -101,7 +104,7 @@ function mostrarPatio(){
                 <td>${chave.Telefone}</td>
                 <td>${chave.Tempo}</td>
                 <td>${chave.HoraEntradaF}</td>
-                <td><span class="badge bg-success">No Horário</span></td>
+                <td><span class="badge bg-info">No Horário</span></td>
                 <td><button type="button" class="btn btn-danger" onclick="confirmarRemocaoVeiculo('${chave.Placa}')"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -157,7 +160,7 @@ function pesquisarVeiculo(placa){
                 <td>${chave.Telefone}</td>
                 <td>${chave.Tempo}</td>
                 <td>${chave.HoraEntradaF}</td>
-                <td><span class="badge bg-success">No Horário</span></td>
+                <td><span class="badge bg-info">No Horário</span></td>
                 <td>
                     <button type="button" class="btn btn-danger" onclick="confirmarRemocaoVeiculo('${chave.Placa}')"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
