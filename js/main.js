@@ -31,39 +31,38 @@ function cadastrarVeiculo(e){
 
     if (placa.value == "" || telefone.value == "" || tempo.value == ""){
         alert("Você não informou os campos necessário !")
-    }
-
-    let regexPlaca = /\d{3}\s{4}/
-    let regexTelefone = /\d{9}/
-
-    let veiculo = {
-        Marca: marcaVeiculo,
-        Modelo: modeloVeiculo,
-        Placa: placaVeiculo,
-        Telefone: telefoneDonoVeiculo,
-        Preco: preco,
-        Tempo: tempo,
-        HoraEntradaF: horaEntradaFormatada,
-        PrevisaoSaidaFormatada: previsaoSaidaFormatada,
-        HoraEntrada: horaEntrada,
-        PrevisaoSaida: previsaoSaida,
-        Pago: pagamento
-    }
-
-    if (localStorage.getItem('patio') === null){
-        let veiculos = []
-        veiculos.push(veiculo);
-        localStorage.setItem('patio', JSON.stringify(veiculos))
     } else {
-        var veiculos = JSON.parse(localStorage.getItem('patio'))
-        veiculos.push(veiculo)
-        localStorage.setItem('patio', JSON.stringify(veiculos))
+        let regexPlaca = /\d{3}\s{4}/
+        let regexTelefone = /\d{9}/
+    
+        let veiculo = {
+            Marca: marcaVeiculo,
+            Modelo: modeloVeiculo,
+            Placa: placaVeiculo,
+            Telefone: telefoneDonoVeiculo,
+            Preco: preco,
+            Tempo: tempo,
+            HoraEntradaF: horaEntradaFormatada,
+            PrevisaoSaidaFormatada: previsaoSaidaFormatada,
+            HoraEntrada: horaEntrada,
+            PrevisaoSaida: previsaoSaida,
+            Pago: pagamento
+        }
+    
+        if (localStorage.getItem('patio') === null){
+            let veiculos = []
+            veiculos.push(veiculo);
+            localStorage.setItem('patio', JSON.stringify(veiculos))
+        } else {
+            var veiculos = JSON.parse(localStorage.getItem('patio'))
+            veiculos.push(veiculo)
+            localStorage.setItem('patio', JSON.stringify(veiculos))
+        }
+    
+        document.querySelector('form').reset()
+    
+        mostrarPatio()
     }
-
-    document.querySelector('form').reset()
-
-    mostrarPatio()
-
     e.preventDefault()
 }
 
