@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
+<body onload="mostrarPatio()">
     
     <main>
         <div class="logo"></div>
@@ -46,7 +46,7 @@
 
     <!-- Modal Adicionar Carro-->
     <div class="modal fade" id="AdicionarCarro" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered" >
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Adicionar Veículo ao Pátio</h5>
@@ -127,6 +127,97 @@
                 <button type="button" class="btn btn-primary" id="adicionar">Adicionar</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal Dar Baixa Veiculo -->
+    <div class="modal fade" id="darBaixaCarro" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Dar baixa no veículo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body body-baixa-carro">
+            
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-danger">Finalizar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Info Veiculo -->
+    <div class="modal fade" id="editarInfoVeiculo" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Editar informações do veículo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body body-edita-carro">
+                <form class="needs-validation" novalidate>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="marcaE">Marca</label>
+                        <select class="form-select" aria-label="Default select example" id="marcaE" required>
+                            <option selected disabled>Selecione a marca</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Ford">Ford</option>
+                            <option value="Fiat">Fiat</option>
+                            <option value="Volkswagen">Volkswagen</option>
+                            <option value="Peugeot">Peugeot</option>
+                            <option value="Renault">Renault</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Mercedes">Mercedes</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Audi">Audi</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="Jeep">Jeep</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <label for="modeloE" class="input-group-text">Modelo</label>
+                        <input type="text" class="form-control" id="modeloE" placeholder="" required>
+                    </div>
+                
+                    <div class="input-group mb-3">
+                        <label for="placaE" class="input-group-text">Placa</label>
+                        <input type="text" class="form-control" id="placaE" placeholder="" required>
+                    </div>
+                
+                    <div class="input-group mb-3">
+                        <label for="telefoneE" class="input-group-text">Telefone</label>
+                        <input type="tel" class="form-control" id="telefoneE" placeholder="99999-9999" pattern="[0-9]{2}-[9]{1}-[0-9]{4}-[0-9]{4}" required>
+                    </div>               
+            
+                    <div class="input-group">
+                        <span class="input-group-text" for="tempoE">Tempo</span>
+                        <select class="form-select" id="tempoE" required>
+                            <option selected></option>
+                            <option value="30">00:30 H</option>
+                            <option value="60">01:00 H</option>
+                            <option value="90">01:30 H</option>
+                            <option value="120">02:00 H</option>
+                        </select>
+                        <span class="input-group-text">Preço</span>
+                        <input type="text" aria-label="Last name" class="form-control" id='precoE' readonly>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-success" id="finalizaE">Finalizar</button>
+            </div>
+        </div>
         </div>
     </div>
 
