@@ -1,7 +1,11 @@
 let botaoAdicionar = document.querySelector("#adicionar")
 let botaoListarPatio = document.querySelector("#mostrarPatio")
+let botaoFinalizarEdicao = document.querySelector("#finalizarE")
+let botaoDarBaixa = document.querySelector("#darBaixa")
 let botaoPesquisar = document.querySelector("#buscar")
-let inputPesquisar = document.querySelector("#pesquisar")
+let inputPesquisar = document.querySelector("#pesquisar") 
+
+// ================================ CREATE =======================================
 
 function cadastrarVeiculo(e){
     let marcaVeiculo = document.querySelector("#marca").value.toUpperCase()
@@ -55,6 +59,8 @@ function cadastrarVeiculo(e){
     }
     e.preventDefault()
 }
+
+// ============================== READ ======================================
 
 function mostrarPatio(){
     let veiculos = JSON.parse(localStorage.getItem('patio'))
@@ -190,44 +196,13 @@ function pesquisarVeiculo(placa){
         }
     }) 
     tabela.innerHTML = tabelaHTML 
+    inputPesquisar.value = ""
 }
 
-function removerVeiculo(placa){
-    let veiculos = JSON.parse(localStorage.getItem('patio'))
-
-    veiculos.forEach((valor, indice) => {
-        if (valor.Placa === placa){
-            veiculos.splice(indice, 1)
-        }
-    })
-
-    localStorage.setItem('patio', JSON.stringify(veiculos))
-
-    mostrarPatio()
-}
-
-function confirmarRemocaoVeiculo(placa){
-    let opcao = confirm("Deseja realmente excluir?")
-
-    if(opcao)
-        removerVeiculo(placa)        
-    else
-        return false
-}
-
-function darBaixaVeiculo(placa){
-    let veiculos = JSON.parse(localStorage.getItem('patio'))
-    let body = document.querySelector(".body-baixa-carro")
-    let botaoFinalizar = document.querySelector(".finalizaBaixa")
-
-    veiculos.forEach((valor, indice) => {
-        if (valor.Placa === placa){
-            //Colocar info
-        }
-    })      
-}
+// ================================ UPDATE ======================================
 
 function editarInfoVeiculo(placa){
+    let valorPlaca = placa
     let veiculos = JSON.parse(localStorage.getItem('patio'))
     let body = document.querySelector(".body-edita-carro")
 
@@ -249,29 +224,100 @@ function editarInfoVeiculo(placa){
         }
     })
 
-}
-
-function finalizaEdicao(placa){
-    let veiculos = JSON.parse(localStorage.getItem('patio'))
-
-    veiculos.forEach((valor, indice) => {
-        if (valor.Placa === placa){
-            Marca = marcaVeiculo.value.toUpperCase()
-            Modelo = modeloVeiculo.value.toUpperCase()
-            Placa = placaVeiculo.value.toUpperCase()
-            Telefone = telefoneDonoVeiculo.value
-            Tempo = tempo.value
-            Preco = preco.value
+    document.querySelector("#tempoE").addEventListener('change', function(){
+        let preco = document.querySelector("#precoE")
+        switch (Number(document.querySelector("#tempoE").value)) {
+            case 30:
+                preco.value = "R$ 1,00"
+                break;
+            case 60:
+                preco.value = "R$ 1,50"
+                break;
+            case 90:
+                preco.value = "R$ 2,00"
+                break;
+            case 120:
+                preco.value = "R$ 2,50"
+                break
+            default:
+                preco.value = ""
+                break;
         }
     })
+
+    botaoFinalizarEdicao.addEventListener('click', function(){
+        let veiculos = JSON.parse(localStorage.getItem('patio'))
+
+        if (placaVeiculo.value == "" || telefoneDonoVeiculo.value == "" || tempo.value == ""){
+            alert("Você não informou os campos necessário !")
+        }else{
+            veiculos.forEach(valor => {
+                if (valor.Placa === valorPlaca){
+                    let horaEntrada = valor.HoraEntrada
+                    let previsaoSaida = horaEntrada + (Number(tempo.value) * 60000)
+                    let aux = new Date(previsaoSaida)
+                    let previsaoSaidaFormatada = `${aux.getHours()}:${aux.getMinutes()}`
+                    valor.Marca = marcaVeiculo.value.toUpperCase()
+                    valor.Modelo = modeloVeiculo.value.toUpperCase()
+                    valor.Placa = placaVeiculo.value.toUpperCase()
+                    valor.Telefone = telefoneDonoVeiculo.value
+                    valor.Tempo = tempo.value
+                    valor.Preco = preco.value
+                    valor.PrevisaoSaidaFormatada = previsaoSaidaFormatada
+                    valor.PrevisaoSaida = previsaoSaida 
+                }
+            })
+    } 
 
     localStorage.setItem('patio', JSON.stringify(veiculos))
 
     document.querySelector('form').reset()
-
+    })
 }
 
+// ======================= DELETE ===================================
 
+function darBaixaVeiculo(placa){
+    let veiculos = JSON.parse(localStorage.getItem('patio'))
+    let body = document.querySelector(".body-baixa-carro")
+    let botaoFinalizar = document.querySelector(".finalizaBaixa")
+    let valorPlaca = placa
+
+    veiculos.forEach((valor, indice) => {
+        if (valor.Placa === placa){
+            //Colocar info
+        }
+    }) 
+    
+    //Remove veiculo
+    botaoDarBaixa.addEventListener('click', function(){
+        let veiculos = JSON.parse(localStorage.getItem('patio'))
+
+        veiculos.forEach((valor, indice) => {
+            if (valor.Placa === valorPlaca){
+                veiculos.splice(indice, 1)
+            }
+        })
+    
+        localStorage.setItem('patio', JSON.stringify(veiculos))
+    
+        mostrarPatio()
+    })
+}
+
+/*function confirmarRemocaoVeiculo(placa){
+    let opcao = confirm("Deseja realmente excluir?")
+
+    if(opcao)
+        removerVeiculo(placa)        
+    else
+        return false
+}*/
+
+
+// ========================= EVENTS ================================
+
+//* Atualiza o patio a cada 30 segundos e verifica se possui algum veiculo em atraso
 setInterval(mostrarPatio, 30000);
 
 botaoAdicionar.addEventListener('click', cadastrarVeiculo)
@@ -279,14 +325,12 @@ botaoAdicionar.addEventListener('click', cadastrarVeiculo)
 botaoListarPatio.addEventListener('click', mostrarPatio)
 
 botaoPesquisar.addEventListener('click', function(){
-    pesquisarVeiculo(inputPesquisar.value.toUpperCase())
-    inputPesquisar.value = ""
+    pesquisarVeiculo(inputPesquisar.value.toUpperCase())    
 })
 
 inputPesquisar.addEventListener('keypress', function(e){
     if(event.keyCode === 13){
         pesquisarVeiculo(inputPesquisar.value.toUpperCase())
-        inputPesquisar.value = ""
     }   
 })
 
