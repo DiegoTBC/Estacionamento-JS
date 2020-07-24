@@ -271,7 +271,8 @@ function editarInfoVeiculo(placa){
 
     localStorage.setItem('patio', JSON.stringify(veiculos))
 
-    document.querySelector('form').reset()
+    mostrarPatio()
+    
     })
 }
 
