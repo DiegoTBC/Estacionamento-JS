@@ -1,10 +1,7 @@
-
-
 let botaoAdicionar = document.querySelector("#adicionar")
 let botaoListarPatio = document.querySelector("#mostrarPatio")
 let botaoPesquisar = document.querySelector("#buscar")
 let inputPesquisar = document.querySelector("#pesquisar")
-
 
 function cadastrarVeiculo(e){
     let marcaVeiculo = document.querySelector("#marca").value.toUpperCase()
@@ -13,14 +10,6 @@ function cadastrarVeiculo(e){
     let telefoneDonoVeiculo = document.querySelector("#telefone").value
     let tempo = document.querySelector("#tempo").value
     let preco = document.querySelector("#preco").value
-    let pago = document.querySelector("#pago").value
-    let naoPago = document.querySelector("#naoPago").value
-    let pagamento
-    if(pago.checked){
-        pagamento = true
-    } else {
-        pagamento = false
-    }
 
     let horaEntrada = Date.now()
     let previsaoSaida = horaEntrada + (Number(tempo) * 60000)
@@ -48,7 +37,6 @@ function cadastrarVeiculo(e){
             PrevisaoSaidaFormatada: previsaoSaidaFormatada,
             HoraEntrada: horaEntrada,
             PrevisaoSaida: previsaoSaida,
-            Pago: pagamento
         }
     
         if (localStorage.getItem('patio') === null){
@@ -70,9 +58,9 @@ function cadastrarVeiculo(e){
 
 function mostrarPatio(){
     let veiculos = JSON.parse(localStorage.getItem('patio'))
-    let listar = document.querySelector(".table")
+    let tabela = document.querySelector(".table")
 
-    let tabela = `<tr>
+    let tabelaHTML = `<tr>
         <th scope="col">Placa</th>
         <th scope="col">Telefone</th>
         <th scope="col">Tempo</th>
@@ -82,11 +70,11 @@ function mostrarPatio(){
         </tr>`
 
     if (veiculos.length === 0){
-        listar.innerHTML = ""
+        tabela.innerHTML = ""
     } else { 
         veiculos.forEach(chave => {
             if(chave.PrevisaoSaida <= Date.now()){
-                tabela +=
+                tabelaHTML +=
                 `<tr>
                 <td scope="row">${chave.Placa}</td>
                 <td>${chave.Telefone}</td>
@@ -109,7 +97,7 @@ function mostrarPatio(){
                 </td>           
                 </tr> `
             } else {
-                tabela +=
+                tabelaHTML +=
                 `<tr>
                 <td scope="row">${chave.Placa}</td>
                 <td>${chave.Telefone}</td>
@@ -133,15 +121,15 @@ function mostrarPatio(){
                 </tr> `
             }          
         })  
-        listar.innerHTML = tabela
+        tabela.innerHTML = tabelaHTML
     }   
 }
 
 function pesquisarVeiculo(placa){
     let veiculos = JSON.parse(localStorage.getItem('patio'))
-    let listar = document.querySelector(".table")
+    let tabela = document.querySelector(".table")
 
-    let tabela = `<tr>
+    let tabelaHTML = `<tr>
         <th scope="col">Placa</th>
         <th scope="col">Telefone</th>
         <th scope="col">Tempo</th>
@@ -153,7 +141,7 @@ function pesquisarVeiculo(placa){
     veiculos.forEach(chave => {
         if (placa === chave.Placa){ 
             if(chave.PrevisaoSaida <= Date.now()){
-                tabela +=
+                tabelaHTML +=
                 `<tr>
                 <td scope="row">${chave.Placa}</td>
                 <td>${chave.Telefone}</td>
@@ -176,7 +164,7 @@ function pesquisarVeiculo(placa){
                 </td>           
                 </tr> `
             } else {
-                tabela +=
+                tabelaHTML +=
                 `<tr>
                 <td scope="row">${chave.Placa}</td>
                 <td>${chave.Telefone}</td>
@@ -201,7 +189,21 @@ function pesquisarVeiculo(placa){
             } 
         }
     }) 
-    listar.innerHTML = tabela  
+    tabela.innerHTML = tabelaHTML 
+}
+
+function removerVeiculo(placa){
+    let veiculos = JSON.parse(localStorage.getItem('patio'))
+
+    veiculos.forEach((valor, indice) => {
+        if (valor.Placa === placa){
+            veiculos.splice(indice, 1)
+        }
+    })
+
+    localStorage.setItem('patio', JSON.stringify(veiculos))
+
+    mostrarPatio()
 }
 
 function confirmarRemocaoVeiculo(placa){
@@ -216,12 +218,13 @@ function confirmarRemocaoVeiculo(placa){
 function darBaixaVeiculo(placa){
     let veiculos = JSON.parse(localStorage.getItem('patio'))
     let body = document.querySelector(".body-baixa-carro")
+    let botaoFinalizar = document.querySelector(".finalizaBaixa")
 
     veiculos.forEach((valor, indice) => {
         if (valor.Placa === placa){
             //Colocar info
         }
-    })
+    })      
 }
 
 function editarInfoVeiculo(placa){
@@ -266,20 +269,6 @@ function finalizaEdicao(placa){
 
     document.querySelector('form').reset()
 
-}
-
-function removerVeiculo(placa){
-    let veiculos = JSON.parse(localStorage.getItem('patio'))
-
-    veiculos.forEach((valor, indice) => {
-        if (valor.Placa === placa){
-            veiculos.splice(indice, 1)
-        }
-    })
-
-    localStorage.setItem('patio', JSON.stringify(veiculos))
-
-    mostrarPatio()
 }
 
 
