@@ -286,7 +286,7 @@ function darBaixaVeiculo(placa){
 
     veiculos.forEach((valor, indice) => {
         if (valor.Placa === placa){
-            //Colocar info
+            //Colocar info aqui dentro
         }
     }) 
     
