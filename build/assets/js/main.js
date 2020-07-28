@@ -210,7 +210,7 @@ function editarInfoVeiculo(placa) {
   let tempo = document.querySelector("#tempoE");
   let preco = document.querySelector("#precoE");
   veiculos.forEach((valor, indice) => {
-    if (valor.Placa === placa) {
+    if (valor.Placa === valorPlaca) {
       marcaVeiculo.value = valor.Marca;
       modeloVeiculo.value = valor.Modelo;
       placaVeiculo.value = valor.Placa;
@@ -285,7 +285,48 @@ function darBaixaVeiculo(placa) {
   let botaoFinalizar = document.querySelector(".finalizaBaixa");
   let valorPlaca = placa;
   veiculos.forEach((valor, indice) => {
-    if (valor.Placa === placa) {//Colocar info aqui dentro
+    if (valor.Placa === placa) {
+      if (valor.PrevisaoSaida <= Date.now()) {
+        body.innerHTML = `
+                <table class="table table-hover">     
+                    <tr>
+                        <th scope="col">Placa</th>
+                        <th scope="col">Tempo</th>
+                        <th scope="col">Entrada</th>
+                        <th scope="col">Saida Prevista</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Observações</th>         
+                    </tr>
+                    <tr>
+                    <td scope="row">${valor.Placa}</td>
+                    <td>${valor.Tempo}</td>
+                    <td>${valor.HoraEntradaF}</td>
+                    <td>${valor.PrevisaoSaidaFormatada}</td>
+                    <td>${valor.Preco}</td>
+                    <td><span class="badge bg-warning text-dark">Atraso</span></td>
+                    <td></td>
+                </table>`;
+      } else {
+        body.innerHTML = `
+                <table class="table table-hover">     
+                    <tr>
+                        <th scope="col">Placa</th>
+                        <th scope="col">Tempo</th>
+                        <th scope="col">Entrada</th>
+                        <th scope="col">Saida Prevista</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Observações</th>         
+                    </tr>
+                    <tr>
+                    <td scope="row">${valor.Placa}</td>
+                    <td>${valor.Tempo}</td>
+                    <td>${valor.HoraEntradaF}</td>
+                    <td>${valor.PrevisaoSaidaFormatada}</td>
+                    <td>${valor.Preco}</td>
+                    <td><span class="badge bg-success">No Horário</span></td>
+                    <td></td>
+                </table>`;
+      }
     }
   }); //Remove veiculo
 

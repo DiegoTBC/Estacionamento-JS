@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Estacionamento JS</title>
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body onload="mostrarPatio()">
     
     <main>
-        <div class="logo"></div>
-
-        <div style="border-top: 3px solid rgb(189, 189, 189); margin-bottom: 15px;" ></div>
+        <img src="assets/img/estacionamento.png" alt="" srcset="" width="150px" height="150px" style="margin-bottom: 10px;">
 
         <div class="botoes">
             <button type="button" class="btn btn-primary w-75" data-toggle="modal" data-target="#AdicionarCarro" style="margin-right:20px;" >Adicionar</button>
@@ -30,8 +30,6 @@
                 </button>
             </div>
         </div>
-
-        <div style="border-bottom: 3px solid rgb(189, 189, 189);"></div>
 
         <div class="listaCarros">
 
@@ -117,7 +115,7 @@
 
     <!-- Modal Dar Baixa Veiculo -->
     <div class="modal fade" id="darBaixaCarro" data-backdrop="static" data-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Dar baixa no veículo</h5>

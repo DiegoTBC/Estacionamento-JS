@@ -27,9 +27,9 @@ function appJS(){
 }
 
 function appIMG(){
-    return gulp.src('src/assets/imgs/**/*.*')
+    return gulp.src('src/assets/img/*')
     .pipe(imagemin())
-    .pipe(gulp.dest('build/assets/imgs'))
+    .pipe(gulp.dest('build/assets/img'))
 }
 
 gulp.task('appHtml', appHtml)
