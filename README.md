@@ -10,9 +10,7 @@ Com ele você é capaz de:
     - Saber se o tempo se esgotou :hourglass:
     - Dar baixa ou editar informações de algum veiculo :black_nib:
 
-### Lista de afazeres
-
-- [ ] Validações dos formulários
+Para testar o funcionamento, [clique aqui](https://diegotbc.github.io/Estacionamento-JS/) (Hospedado no Github Pages). :computer:
 
 ### Status do Projeto
 Concluído :heavy_check_mark:
