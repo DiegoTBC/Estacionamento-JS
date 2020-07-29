@@ -15,7 +15,7 @@ Com ele você é capaz de:
 - [ ] Validações dos formulários
 
 ### Status do Projeto
-Em desenvolvimento :warning:
+Concluído :heavy_check_mark:
 
 License
 ----
